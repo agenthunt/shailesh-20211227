@@ -39,9 +39,10 @@ export function OrderListItem({
         style={{
           position: 'absolute',
           backgroundColor: depthColor,
-          height: '100%',
-          borderWidth: 0.1,
-          borderColor: 'rgba(255, 255, 255, 0.1)',
+          height: 28,
+
+          //   borderWidth: 0.1,
+          //   borderColor: 'rgba(255, 255, 255, 0.1)',
           width: `${item.depth * 100}%`,
         }}
       />

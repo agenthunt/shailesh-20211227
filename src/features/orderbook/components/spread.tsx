@@ -3,10 +3,10 @@ import {View, Text, StyleSheet} from 'react-native';
 import {useAppSelector} from '../../../app/hooks';
 import {selectors} from '../orderbookSlice';
 
-export function Spread() {
+export function Spread({style}: {style: any}) {
   const spread = useAppSelector(selectors.getSpread());
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Text style={styles.text}>{spread} Spread</Text>
     </View>
   );

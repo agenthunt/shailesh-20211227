@@ -25,12 +25,7 @@ const App = () => {
   return (
     <SafeAreaView data-cy="safeAreaView" style={styles.container}>
       <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={styles.scrollView}
-        contentContainerStyle={styles.contentContainerStyle}>
-        <Orderbook />
-      </ScrollView>
+      <Orderbook />
     </SafeAreaView>
   );
 };
