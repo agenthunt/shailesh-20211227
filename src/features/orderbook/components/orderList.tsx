@@ -55,6 +55,7 @@ export function OrderList({
   priceColumnColor = '#0e2018',
   columnOrder = OrderListColumnSortOrder.PST,
   hideHeader = false,
+  flipDepthLevelDirection = false,
 }: {
   items: OrderListItemType[];
   depthColor: string;
@@ -62,6 +63,7 @@ export function OrderList({
   priceColumnColor?: string;
   columnOrder?: OrderListColumnSortOrder;
   hideHeader?: boolean;
+  flipDepthLevelDirection?: boolean;
 }) {
   const renderOrderListItem = ({item}: {item: OrderListItemType}) => {
     return (
@@ -70,6 +72,7 @@ export function OrderList({
         depthColor={depthColor}
         priceColumnColor={priceColumnColor}
         columnOrder={columnOrder}
+        flipDepthLevelDirection={flipDepthLevelDirection}
       />
     );
   };

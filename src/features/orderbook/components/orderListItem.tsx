@@ -9,11 +9,13 @@ export function OrderListItem({
   depthColor,
   priceColumnColor,
   columnOrder,
+  flipDepthLevelDirection = false,
 }: {
   item: OrderListItemType;
   depthColor: string;
   priceColumnColor: string;
   columnOrder: OrderListColumnSortOrder;
+  flipDepthLevelDirection?: boolean;
 }) {
   const priceColumn = (
     <View style={styles.column}>
@@ -38,13 +40,21 @@ export function OrderListItem({
       <View
         style={{
           position: 'absolute',
-          backgroundColor: depthColor,
           height: 28,
-          //   borderWidth: 0.1,
-          //   borderColor: 'rgba(255, 255, 255, 0.1)',
-          width: `${item.depth * 100}%`,
-        }}
-      />
+          width: '100%',
+          flexDirection:
+            flipDepthLevelDirection === true ? 'row-reverse' : 'row',
+        }}>
+        <View
+          style={{
+            borderWidth: 0.1,
+            borderColor: 'rgba(255, 255, 255, 0.1)',
+            backgroundColor: depthColor,
+            width: `${item.depth * 100}%`,
+            height: '100%',
+          }}
+        />
+      </View>
       {columnOrder === OrderListColumnSortOrder.PST ? (
         <>
           {priceColumn}

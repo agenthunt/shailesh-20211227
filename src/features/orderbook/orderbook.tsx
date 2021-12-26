@@ -37,6 +37,7 @@ export function Orderbook() {
         isDesktop ? OrderListColumnSortOrder.TSP : OrderListColumnSortOrder.PST
       }
       hideHeader={!isDesktop}
+      flipDepthLevelDirection={isDesktop}
     />
   );
 

@@ -47,6 +47,8 @@ export const orderbookSlice = createSlice({
       state.subscribeToOrderbookInProgress = true;
       state.subscribeToOrderbookError = null;
       state.currentProductIds = action.payload;
+      state.asks = [];
+      state.bids = [];
     },
     subscribeToOrderbookSuccess(state) {
       state.subscribeToOrderbookInProgress = false;
@@ -184,8 +186,12 @@ const workerSagas: any = {
     let newProductIds = orderbookSliceState.currentProductIds;
     if (orderbookSliceState.currentProductIds[0] === ProductIdType.PI_ETHUSD) {
       newProductIds = [ProductIdType.PI_XBTUSD];
-    } else {
+    } else if (
+      orderbookSliceState.currentProductIds[0] === ProductIdType.PI_XBTUSD
+    ) {
       newProductIds = [ProductIdType.PI_ETHUSD];
+    } else {
+      newProductIds = [ProductIdType.PI_XBTUSD];
     }
     yield put(orderbookSlice.actions.subscribeToOrderbook(newProductIds));
   },
