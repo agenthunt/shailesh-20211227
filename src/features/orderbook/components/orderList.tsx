@@ -50,33 +50,19 @@ const OrderListHeaderRow = ({
 
 export function OrderList({
   items,
-  depths,
   depthColor,
   inverted = false,
   priceColumnColor = '#0e2018',
   columnOrder = OrderListColumnSortOrder.PST,
   hideHeader = false,
 }: {
-  items: OrderSideType[];
-  depths: number[];
+  items: OrderListItemType[];
   depthColor: string;
   inverted?: boolean;
   priceColumnColor?: string;
   columnOrder?: OrderListColumnSortOrder;
   hideHeader?: boolean;
 }) {
-  const priceFormatter = new Intl.NumberFormat('en', {
-    minimumFractionDigits: 2,
-  });
-  const sizeFormatter = new Intl.NumberFormat('en', {minimumFractionDigits: 0});
-  const transformedItems: OrderListItemType[] = items.map((item, index) => {
-    return {
-      price: priceFormatter.format(item[0]),
-      size: sizeFormatter.format(item[1]),
-      total: sizeFormatter.format(item[2]),
-      depth: depths[index],
-    };
-  });
   const renderOrderListItem = ({item}: {item: OrderListItemType}) => {
     return (
       <OrderListItem
@@ -91,7 +77,7 @@ export function OrderList({
     <View style={styles.container}>
       {!hideHeader ? <OrderListHeaderRow columnOrder={columnOrder} /> : null}
       <FlatList
-        data={transformedItems}
+        data={items}
         renderItem={renderOrderListItem}
         keyExtractor={(item: OrderListItemType) => String(item.price)}
         inverted={inverted}

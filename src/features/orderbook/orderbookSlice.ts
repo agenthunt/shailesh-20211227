@@ -18,6 +18,7 @@ import {
   FeedType,
   MessagePayloadType,
   OrderbookState,
+  OrderListItemType,
   OrderSideType,
   ProductIdType,
 } from './types';
@@ -42,11 +43,24 @@ export const orderbookSlice = createSlice({
     setNumLevels(state, action: PayloadAction<number>) {
       state.numLevels = action.payload;
     },
-    subscribeToOrderbook(state) {
+    subscribeToOrderbook(state, action: PayloadAction<ProductIdType[]>) {
       state.subscribeToOrderbookInProgress = true;
       state.subscribeToOrderbookError = null;
+      state.currentProductIds = action.payload;
     },
-    unsubscribeToOrderbook(state) {},
+    subscribeToOrderbookSuccess(state) {
+      state.subscribeToOrderbookInProgress = false;
+      state.subscribeToOrderbookError = null;
+    },
+    unsubscribeToOrderbook(state) {
+      state.unSubscribeToOrderbookInProgress = true;
+      state.unSubscribeToOrderbookError = null;
+    },
+    unsubscribeToOrderbookSuccess(state) {
+      state.unSubscribeToOrderbookInProgress = false;
+      state.unSubscribeToOrderbookError = null;
+      state.currentProductIds = [];
+    },
     setOrders(
       state,
       action: PayloadAction<{
@@ -60,14 +74,18 @@ export const orderbookSlice = createSlice({
     setCurrentProductIds(state, action) {
       state.currentProductIds = action.payload;
     },
+    toggleFeed() {},
   },
 });
 
-function createOrderbookEventChannel(socket: WebSocket) {
+function createOrderbookEventChannel(
+  socket: WebSocket,
+  product_ids: ProductIdType[],
+) {
   const subscribeMessagePayload: MessagePayloadType = {
     event: EventType.SUBSCRIBE,
     feed: FeedType.BOOK_UI_1,
-    product_ids: [ProductIdType.PI_XBTUSD],
+    product_ids,
   };
   socket.send(JSON.stringify(subscribeMessagePayload));
 
@@ -84,7 +102,7 @@ function createOrderbookEventChannel(socket: WebSocket) {
       const unsubscripeMessagePayload: MessagePayloadType = {
         event: EventType.UNSUBSCRIBE,
         feed: FeedType.BOOK_UI_1,
-        product_ids: [ProductIdType.PI_XBTUSD],
+        product_ids,
       };
       socket.send(JSON.stringify(unsubscripeMessagePayload));
       socket.onmessage = null;
@@ -96,23 +114,29 @@ function createOrderbookEventChannel(socket: WebSocket) {
 }
 
 const workerSagas: any = {
-  *subscribeToOrderbookSaga() {
+  *subscribeToOrderbookSaga({payload}: {payload: ProductIdType[]}) {
     const socket: WebSocket = yield call(createCryptoFacilitiesConnection);
+    const orderbookSliceState: OrderbookState = yield select(
+      state => state.orderbook,
+    );
 
     // Connects and subscribes to orderbook event channel
     const orderbookEventChannel: EventChannel<unknown> = yield call(
       createOrderbookEventChannel,
       socket,
+      orderbookSliceState.currentProductIds,
     );
 
     // processes events
     yield takeEvery(orderbookEventChannel, workerSagas.processEventSaga);
+    yield put(orderbookSlice.actions.subscribeToOrderbookSuccess());
 
     // wait for unsubscribe action dispatch
     yield take(orderbookSlice.actions.unsubscribeToOrderbook.type);
 
     // unsuscribe and close eventchannel and socket
     orderbookEventChannel.close();
+    yield put(orderbookSlice.actions.unsubscribeToOrderbookSuccess());
   },
   *processEventSaga(eventString: any) {
     const event = JSON.parse(eventString);
@@ -150,6 +174,21 @@ const workerSagas: any = {
       );
     }
   },
+  *toggleFeedSaga() {
+    //unsubscribe
+    yield put(orderbookSlice.actions.unsubscribeToOrderbook());
+    //change currentProductIds
+    const orderbookSliceState: OrderbookState = yield select(
+      state => state.orderbook,
+    );
+    let newProductIds = orderbookSliceState.currentProductIds;
+    if (orderbookSliceState.currentProductIds[0] === ProductIdType.PI_ETHUSD) {
+      newProductIds = [ProductIdType.PI_XBTUSD];
+    } else {
+      newProductIds = [ProductIdType.PI_ETHUSD];
+    }
+    yield put(orderbookSlice.actions.subscribeToOrderbook(newProductIds));
+  },
 };
 
 const watcherSagas: any = {
@@ -157,6 +196,12 @@ const watcherSagas: any = {
     yield takeLatest(
       orderbookSlice.actions.subscribeToOrderbook.type,
       workerSagas.subscribeToOrderbookSaga,
+    );
+  },
+  *watchToggleFeedRequest() {
+    yield takeLatest(
+      orderbookSlice.actions.toggleFeed.type,
+      workerSagas.toggleFeedSaga,
     );
   },
 };
@@ -167,6 +212,11 @@ export function* rootSaga() {
   );
   yield all(allSagas);
 }
+
+const priceFormatter = new Intl.NumberFormat('en', {
+  minimumFractionDigits: 2,
+});
+const sizeFormatter = new Intl.NumberFormat('en', {minimumFractionDigits: 0});
 
 export const selectors = {
   getOrderSidesDepths() {
@@ -199,6 +249,41 @@ export const selectors = {
           });
           return priceFormatter.format(Math.abs(highestBid - lowestAsk));
         }
+      },
+    );
+  },
+  getFormattedOrdersForOrderList() {
+    return createSelector(
+      (state: RootState) => state.orderbook,
+      selectors.getOrderSidesDepths(),
+      (
+        orderbookSlice,
+        {asksDepths, bidsDepths}: {asksDepths: number[]; bidsDepths: number[]},
+      ) => {
+        const formattedAsks: OrderListItemType[] = orderbookSlice.asks.map(
+          (item, index) => {
+            return {
+              price: priceFormatter.format(item[0]),
+              size: sizeFormatter.format(item[1]),
+              total: sizeFormatter.format(item[2]),
+              depth: asksDepths[index],
+            };
+          },
+        );
+        const formattedBids: OrderListItemType[] = orderbookSlice.bids.map(
+          (item, index) => {
+            return {
+              price: priceFormatter.format(item[0]),
+              size: sizeFormatter.format(item[1]),
+              total: sizeFormatter.format(item[2]),
+              depth: bidsDepths[index],
+            };
+          },
+        );
+        return {
+          formattedAsks,
+          formattedBids,
+        };
       },
     );
   },

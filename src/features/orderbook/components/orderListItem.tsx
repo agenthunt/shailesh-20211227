@@ -40,7 +40,6 @@ export function OrderListItem({
           position: 'absolute',
           backgroundColor: depthColor,
           height: 28,
-
           //   borderWidth: 0.1,
           //   borderColor: 'rgba(255, 255, 255, 0.1)',
           width: `${item.depth * 100}%`,
