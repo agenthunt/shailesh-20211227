@@ -1,0 +1,71 @@
+import {MessageOrderSideType, OrderSideType} from '../types';
+import {processOrderSide} from '../utils';
+
+describe('utility functions tests', () => {
+  it('should return correct new Order side', () => {
+    const deltaOrderSides: MessageOrderSideType[] = [
+      [1000, 50],
+      [1005, 100],
+      [1010, 1000],
+    ];
+    const currentOrderSides: OrderSideType[] = [];
+    const expectedResult: OrderSideType[] = [
+      [1000, 50, 50],
+      [1005, 100, 150],
+      [1010, 1000, 1150],
+    ];
+    const result = processOrderSide(currentOrderSides, deltaOrderSides);
+    expect(result).toStrictEqual(expectedResult);
+  });
+
+  it('should remove 0 size orders from current orders when delta price is 0', () => {
+    const deltaOrderSides: MessageOrderSideType[] = [
+      [1000, 50],
+      [1005, 0],
+      [1010, 1000],
+    ];
+    const currentOrderSides: OrderSideType[] = [
+      [1000, 50, 50],
+      [1005, 100, 150],
+      [1010, 1000, 1150],
+    ];
+    const expectedResult: OrderSideType[] = [
+      [1000, 50, 50],
+      [1010, 1000, 1050],
+    ];
+    const result = processOrderSide(currentOrderSides, deltaOrderSides);
+    expect(result).toStrictEqual(expectedResult);
+  });
+
+  it('larger set data test', () => {
+    const deltaBids: MessageOrderSideType[] = [
+      [50545.5, 18398.0],
+      [50545.0, 7817.0],
+      [50538.0, 500.0],
+      [50533.0, 11461.0],
+      [50531.0, 19999.0],
+      [50528.0, 15433.0],
+      [50525.0, 4001.0],
+      [50520.5, 1993.0],
+      [50520.0, 5000.0],
+      [50519.5, 14049.0],
+      [50518.5, 5947.0],
+      [50516.5, 25883.0],
+      [50512.5, 4000.0],
+      [50512.0, 3600.0],
+      [50511.0, 56803.0],
+      [50510.5, 20000.0],
+      [50508.0, 3441.0],
+      [50507.0, 15500.0],
+      [50506.0, 25960.0],
+      [50505.5, 12500.0],
+      [50502.0, 10100.0],
+      [50500.0, 650.0],
+      [50499.5, 4000.0],
+      [50498.0, 45000.0],
+      [50494.5, 199.0],
+    ];
+
+    const result = processOrderSide([], deltaBids);
+  });
+});
