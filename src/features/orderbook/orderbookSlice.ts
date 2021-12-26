@@ -22,7 +22,11 @@ import {
   OrderSideType,
   ProductIdType,
 } from './types';
-import {getProcessedOrderSides, normalizeOrders} from './utils';
+import {
+  getProcessedOrderSides,
+  normalizeOrders,
+  processOrderSide,
+} from './utils';
 
 const initialState: OrderbookState = {
   bids: [],
@@ -161,17 +165,21 @@ const workerSagas: any = {
       const orderbookSliceState: OrderbookState = yield select(
         state => state.orderbook,
       );
-      const processedBids = getProcessedOrderSides({
+      const processedOrderSides = getProcessedOrderSides({
         currentAsks: orderbookSliceState.asks,
         currentBids: orderbookSliceState.bids,
         deltaAsks: event?.asks,
         deltaBids: event?.bids,
       });
-
+      const trimSize = Math.min(
+        processedOrderSides.newBids.length,
+        processedOrderSides.newBids.length,
+        orderbookSliceState.displaySize,
+      );
       yield put(
         orderbookSlice.actions.setOrders({
-          bids: processedBids.newBids.slice(0, orderbookSliceState.displaySize),
-          asks: processedBids.newAsks.slice(0, orderbookSliceState.displaySize),
+          bids: processedOrderSides.newBids.slice(0, trimSize),
+          asks: processedOrderSides.newAsks.slice(0, trimSize),
         }),
       );
     }

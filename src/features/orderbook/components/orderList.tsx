@@ -1,12 +1,20 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {AccentColor} from '../../../theme/colors';
-import {
-  OrderListColumnSortOrder,
-  OrderListItemType,
-  OrderSideType,
-} from '../types';
+import {OrderListColumnSortOrder, OrderListItemType} from '../types';
 import {OrderListItem} from './orderListItem';
+
+const ITEM_HEIGHT = 60;
+const getItemLayout = (
+  data: OrderListItemType[] | undefined | null,
+  index: number,
+) => {
+  return {
+    length: ITEM_HEIGHT,
+    offset: ITEM_HEIGHT * index,
+    index,
+  };
+};
 
 const OrderListHeaderRow = ({
   columnOrder,
@@ -84,6 +92,9 @@ export function OrderList({
         renderItem={renderOrderListItem}
         keyExtractor={(item: OrderListItemType) => String(item.price)}
         inverted={inverted}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+        getItemLayout={getItemLayout}
       />
     </View>
   );

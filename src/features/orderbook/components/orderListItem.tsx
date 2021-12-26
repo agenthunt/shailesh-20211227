@@ -1,8 +1,7 @@
-import {OrderListColumnSortOrder, OrderListItemType} from '../types';
 import React from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {AccentColor} from '../../../theme/colors';
-import {OrderSideType} from '../types';
+import {OrderListColumnSortOrder, OrderListItemType} from '../types';
 
 export function OrderListItem({
   item,
@@ -93,5 +92,6 @@ const styles = StyleSheet.create({
   },
   textPrice: {
     color: AccentColor,
+    // fontFamily: 'RobotMono-Regular.ttf',
   },
 });

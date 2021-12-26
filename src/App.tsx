@@ -21,7 +21,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import {useAppDispatch} from './app/hooks';
+import {useAppDimensions, useAppDispatch} from './app/hooks';
 import {Orderbook} from './features/orderbook/orderbook';
 import {orderbookSlice} from './features/orderbook/orderbookSlice';
 
@@ -29,6 +29,7 @@ const App = () => {
   const appState = useRef(AppState.currentState);
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
   const dispatch = useAppDispatch();
+  const {isDesktop} = useAppDimensions();
   useEffect(() => {
     const subscription = AppState.addEventListener('change', nextAppState => {
       if (

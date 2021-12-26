@@ -76,7 +76,7 @@ export function Orderbook() {
     </>
   );
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {height: isDesktop ? '100vh' : '100%'}]}>
       <View style={styles.headingContainer}>
         <Text style={styles.heading}> Order Book </Text>
         {isDesktop && spreadDesktop}
