@@ -2,6 +2,7 @@ import React from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {AccentColor} from '../../../theme/colors';
 import {OrderListColumnSortOrder, OrderListItemType} from '../types';
+import {OrderListHeaderRow} from './orderListHeaderRow';
 import {OrderListItem} from './orderListItem';
 
 const ITEM_HEIGHT = 60;
@@ -14,46 +15,6 @@ const getItemLayout = (
     offset: ITEM_HEIGHT * index,
     index,
   };
-};
-
-const OrderListHeaderRow = ({
-  columnOrder,
-}: {
-  columnOrder: OrderListColumnSortOrder;
-}) => {
-  const priceColumn = (
-    <View style={styles.column}>
-      <Text style={styles.headerPrice}>PRICE</Text>
-    </View>
-  );
-  const sizeColumn = (
-    <View style={styles.column}>
-      <Text style={styles.headerSize}>SIZE</Text>
-    </View>
-  );
-
-  const totalColumn = (
-    <View style={styles.column}>
-      <Text style={styles.headerTotal}>TOTAL</Text>
-    </View>
-  );
-  return (
-    <View style={styles.headerRowContainer}>
-      {columnOrder === OrderListColumnSortOrder.PST ? (
-        <>
-          {priceColumn}
-          {sizeColumn}
-          {totalColumn}
-        </>
-      ) : (
-        <>
-          {totalColumn}
-          {sizeColumn}
-          {priceColumn}
-        </>
-      )}
-    </View>
-  );
 };
 
 export function OrderList({
@@ -107,47 +68,5 @@ const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: 'row',
     padding: 4,
-  },
-  headerRowContainer: {
-    flexDirection: 'row',
-    marginBottom: 16,
-  },
-  column: {
-    flex: 0.33,
-    alignItems: 'flex-end',
-    paddingRight: 20,
-  },
-  textTotal: {
-    color: '#fff',
-  },
-  textSize: {
-    color: '#fff',
-  },
-  textPrice: {
-    color: AccentColor,
-  },
-  headerTotal: {
-    color: '#98a6af',
-    borderBottomWidth: 0.3,
-    borderStyle: 'dashed',
-    borderRadius: 1,
-    borderBottomColor: '#98a6af',
-    alignSelf: 'flex-end',
-  },
-  headerSize: {
-    color: '#98a6af',
-    borderBottomWidth: 0.3,
-    borderStyle: 'dashed',
-    borderRadius: 1,
-    borderBottomColor: '#98a6af',
-    alignSelf: 'flex-end',
-  },
-  headerPrice: {
-    color: '#98a6af',
-    borderBottomWidth: 0.3,
-    borderStyle: 'dashed',
-    borderRadius: 1,
-    borderBottomColor: '#98a6af',
-    alignSelf: 'flex-end',
   },
 });

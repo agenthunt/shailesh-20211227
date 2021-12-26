@@ -1,13 +1,14 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {useAppSelector} from '../../../app/hooks';
+import {LED_FONT_FAMILY} from '../../../theme/fonts';
 import {selectors} from '../orderbookSlice';
 
 export function Spread({style}: {style?: any}) {
   const spread = useAppSelector(selectors.getSpread());
   return (
     <View style={[styles.container, style]}>
-      <Text style={styles.text}>{spread} Spread</Text>
+      {spread && <Text style={styles.text}>{spread} - Spread</Text>}
     </View>
   );
 }
@@ -22,6 +23,9 @@ const styles = StyleSheet.create({
     borderStyle: 'dashed',
     borderRadius: 1,
     borderBottomColor: '#98a6af',
-    alignSelf: 'flex-end',
+    fontFamily: LED_FONT_FAMILY,
+    fontSize: 12,
+    textAlignVertical: 'center',
+    textAlign: 'center',
   },
 });

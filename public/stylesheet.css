@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'GtamblogCapsRegular';
+  src: url('fonts/LED-SCREEN-GTAMBLOG-CAPS-20.eot');
+  src: url('fonts/LED-SCREEN-GTAMBLOG-CAPS-20.eot?#iefix')
+      format('embedded-opentype'),
+    url('fonts/LED-SCREEN-GTAMBLOG-CAPS-20.woff2') format('woff2'),
+    url('fonts/LED-SCREEN-GTAMBLOG-CAPS-20.woff') format('woff'),
+    url('fonts/LED-SCREEN-GTAMBLOG-CAPS-20.ttf') format('truetype'),
+    url('fonts/LED-SCREEN-GTAMBLOG-CAPS-20.svg#LED-SCREEN-GTAMBLOG-CAPS+-2.0')
+      format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

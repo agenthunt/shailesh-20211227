@@ -5,7 +5,9 @@ import {
   useAppSelector,
   useAppDimensions,
 } from '../../app/hooks';
+import {LedButton} from '../../components/ledButton';
 import {CardBackgroundColor} from '../../theme/colors';
+import {LED_FONT_FAMILY} from '../../theme/fonts';
 import {OrderList} from './components/orderList';
 import {Spread} from './components/spread';
 import {orderbookSlice, selectors} from './orderbookSlice';
@@ -31,7 +33,7 @@ export function Orderbook() {
   const bidsList = (
     <OrderList
       items={formattedBids}
-      depthColor="#132f23"
+      depthColor="#134f23"
       priceColumnColor="#3eac2d"
       columnOrder={
         isDesktop ? OrderListColumnSortOrder.TSP : OrderListColumnSortOrder.PST
@@ -44,7 +46,7 @@ export function Orderbook() {
   const asksList = (
     <OrderList
       items={formattedAsks}
-      depthColor="#341c25"
+      depthColor="#641c25"
       priceColumnColor="#eb4057"
       columnOrder={OrderListColumnSortOrder.PST}
       inverted={!isDesktop}
@@ -89,7 +91,7 @@ export function Orderbook() {
       <View style={styles.buttonContainer}>
         {!isSubscribedToOrderbook && (
           <View style={styles.button}>
-            <Button
+            <LedButton
               title="Subscribe"
               onPress={() => {
                 dispatch(orderbookSlice.actions.toggleFeed());
@@ -99,8 +101,8 @@ export function Orderbook() {
         )}
         {isSubscribedToOrderbook && (
           <View style={styles.button}>
-            <Button
-              title="UnSubscribe"
+            <LedButton
+              title="Unsubscribe"
               onPress={() => {
                 dispatch(orderbookSlice.actions.unsubscribeToOrderbook());
               }}
@@ -108,7 +110,7 @@ export function Orderbook() {
           </View>
         )}
         <View style={styles.button}>
-          <Button
+          <LedButton
             title="Toggle Feed"
             onPress={() => {
               dispatch(orderbookSlice.actions.toggleFeed());
@@ -129,10 +131,15 @@ const styles = StyleSheet.create({
   },
   headingContainer: {
     flexDirection: 'row',
+    width: '100%',
   },
   heading: {
-    fontSize: 40,
+    fontSize: 26,
     color: '#fff',
+    fontFamily: LED_FONT_FAMILY,
+    textAlignVertical: 'center',
+    textAlign: 'center',
+    paddingBottom: 8,
   },
   spreadWebContainer: {
     alignSelf: 'center',
@@ -151,6 +158,10 @@ const styles = StyleSheet.create({
   currentProductIds: {
     color: '#fff',
     alignSelf: 'center',
+    fontFamily: LED_FONT_FAMILY,
+    textAlignVertical: 'center',
+    textAlign: 'center',
+    fontSize: 12,
   },
   buttonContainer: {
     flexDirection: 'row',

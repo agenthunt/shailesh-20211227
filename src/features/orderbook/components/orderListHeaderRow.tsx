@@ -4,57 +4,29 @@ import {AccentColor} from '../../../theme/colors';
 import {LED_FONT_FAMILY} from '../../../theme/fonts';
 import {OrderListColumnSortOrder, OrderListItemType} from '../types';
 
-export function OrderListItem({
-  item,
-  depthColor,
-  priceColumnColor,
+export function OrderListHeaderRow({
   columnOrder,
-  flipDepthLevelDirection = false,
 }: {
-  item: OrderListItemType;
-  depthColor: string;
-  priceColumnColor: string;
   columnOrder: OrderListColumnSortOrder;
-  flipDepthLevelDirection?: boolean;
 }) {
   const priceColumn = (
     <View style={styles.column}>
-      <Text style={[styles.textPrice, {color: priceColumnColor}]}>
-        {item.price}
-      </Text>
+      <Text style={styles.headerPrice}>PRICE</Text>
     </View>
   );
   const sizeColumn = (
     <View style={styles.column}>
-      <Text style={styles.textSize}>{item.size}</Text>
+      <Text style={styles.headerSize}>SIZE</Text>
     </View>
   );
 
   const totalColumn = (
     <View style={styles.column}>
-      <Text style={styles.textTotal}>{item.total}</Text>
+      <Text style={styles.headerTotal}>TOTAL</Text>
     </View>
   );
   return (
-    <View style={[styles.itemContainer]}>
-      <View
-        style={{
-          position: 'absolute',
-          height: 28,
-          width: '100%',
-          flexDirection:
-            flipDepthLevelDirection === true ? 'row-reverse' : 'row',
-        }}>
-        <View
-          style={{
-            borderWidth: 0.1,
-            borderColor: 'rgba(255, 255, 255, 0.1)',
-            backgroundColor: depthColor,
-            width: `${item.depth * 100}%`,
-            height: '100%',
-          }}
-        />
-      </View>
+    <View style={styles.headerRowContainer}>
       {columnOrder === OrderListColumnSortOrder.PST ? (
         <>
           {priceColumn}
@@ -73,38 +45,46 @@ export function OrderListItem({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  itemContainer: {
+  headerRowContainer: {
     flexDirection: 'row',
-    padding: 4,
-    flex: 1,
+    marginBottom: 16,
   },
   column: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    flex: 0.33,
+    alignItems: 'flex-end',
     paddingRight: 20,
-    // backgroundColor: 'blue',
   },
-  textTotal: {
-    color: '#fff',
+  headerTotal: {
+    color: '#98a6af',
+    borderBottomWidth: 0.3,
+    borderStyle: 'dashed',
+    borderRadius: 1,
+    borderBottomColor: '#98a6af',
+    alignSelf: 'flex-end',
     fontFamily: LED_FONT_FAMILY,
     fontSize: 12,
     textAlignVertical: 'center',
     textAlign: 'center',
   },
-  textSize: {
-    color: '#fff',
+  headerSize: {
+    color: '#98a6af',
+    borderBottomWidth: 0.3,
+    borderStyle: 'dashed',
+    borderRadius: 1,
+    borderBottomColor: '#98a6af',
+    alignSelf: 'flex-end',
     fontFamily: LED_FONT_FAMILY,
     fontSize: 12,
     textAlignVertical: 'center',
     textAlign: 'center',
   },
-  textPrice: {
-    color: AccentColor,
+  headerPrice: {
+    color: '#98a6af',
+    borderBottomWidth: 0.3,
+    borderStyle: 'dashed',
+    borderRadius: 1,
+    borderBottomColor: '#98a6af',
+    alignSelf: 'flex-end',
     fontFamily: LED_FONT_FAMILY,
     fontSize: 12,
     textAlignVertical: 'center',
