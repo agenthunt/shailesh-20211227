@@ -10,7 +10,6 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "start-web": "react-scripts start",
     "build-web": "react-scripts build",
-    "test-web": "react-scripts test --env=jsdom",
     "eject-web": "react-scripts eject"
   },
   "dependencies": {
@@ -32,32 +31,24 @@
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
-    "@types/jest": "^26.0.23",
+    "@types/jest": "27.1.2",
     "@types/lodash": "^4.14.178",
     "@types/react-native": "^0.66.4",
     "@types/react-test-renderer": "^17.0.1",
+    "@types/redux-mock-store": "^1.0.3",
     "@typescript-eslint/eslint-plugin": "5.8.0",
     "@typescript-eslint/parser": "5.8.0",
-    "babel-jest": "^26.6.3",
+    "babel-jest": "27.4.5",
     "eslint": "8.5.0",
-    "jest": "^26.6.3",
+    "jest": "27.1.2",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-test-renderer": "17.0.2",
+    "ts-jest": "27.1.2",
+    "ts-node": "^10.4.0",
     "typescript": "4.5.4"
   },
   "resolutions": {
     "@types/react": "^17"
-  },
-  "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
   },
   "browserslist": {
     "production": [

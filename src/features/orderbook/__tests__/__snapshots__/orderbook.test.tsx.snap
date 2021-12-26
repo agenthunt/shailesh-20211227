@@ -1,0 +1,380 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Orderbook component tests renders default state of Orderbook correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "stretch",
+        "backgroundColor": "#1c2a31",
+        "flex": 1,
+        "padding": 8,
+      },
+      Object {
+        "height": "100%",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "rgba(0,0,0,0.1)",
+        "bottom": 0,
+        "justifyContent": "center",
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <ActivityIndicator
+      size="large"
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#fff",
+          "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+          "fontSize": 26,
+          "paddingBottom": 8,
+          "textAlign": "center",
+          "textAlignVertical": "center",
+        }
+      }
+    >
+       Order Book 
+    </Text>
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#fff",
+          "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+          "fontSize": 12,
+          "textAlign": "center",
+          "textAlignVertical": "center",
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "column",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "marginBottom": 16,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "flex-end",
+              "flex": 0.33,
+              "paddingRight": 20,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-end",
+                "borderBottomColor": "#98a6af",
+                "borderBottomWidth": 0.3,
+                "borderRadius": 1,
+                "borderStyle": "dashed",
+                "color": "#98a6af",
+                "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+                "fontSize": 12,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            PRICE
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "flex-end",
+              "flex": 0.33,
+              "paddingRight": 20,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-end",
+                "borderBottomColor": "#98a6af",
+                "borderBottomWidth": 0.3,
+                "borderRadius": 1,
+                "borderStyle": "dashed",
+                "color": "#98a6af",
+                "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+                "fontSize": 12,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            SIZE
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "flex-end",
+              "flex": 0.33,
+              "paddingRight": 20,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-end",
+                "borderBottomColor": "#98a6af",
+                "borderBottomWidth": 0.3,
+                "borderRadius": 1,
+                "borderStyle": "dashed",
+                "color": "#98a6af",
+                "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+                "fontSize": 12,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            TOTAL
+          </Text>
+        </View>
+      </View>
+      <RCTScrollView
+        data={Array []}
+        getItem={[Function]}
+        getItemCount={[Function]}
+        getItemLayout={[Function]}
+        invertStickyHeaders={true}
+        inverted={true}
+        keyExtractor={[Function]}
+        onContentSizeChange={[Function]}
+        onLayout={[Function]}
+        onMomentumScrollBegin={[Function]}
+        onMomentumScrollEnd={[Function]}
+        onScroll={[Function]}
+        onScrollBeginDrag={[Function]}
+        onScrollEndDrag={[Function]}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        stickyHeaderIndices={Array []}
+        style={
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleY": -1,
+                },
+              ],
+            },
+            undefined,
+          ]
+        }
+        viewabilityConfigCallbackPairs={Array []}
+      >
+        <View />
+      </RCTScrollView>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "padding": 8,
+          },
+          Object {
+            "alignSelf": "center",
+            "justifyContent": "center",
+            "margin": "auto",
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <RCTScrollView
+        data={Array []}
+        getItem={[Function]}
+        getItemCount={[Function]}
+        getItemLayout={[Function]}
+        invertStickyHeaders={false}
+        inverted={false}
+        keyExtractor={[Function]}
+        onContentSizeChange={[Function]}
+        onLayout={[Function]}
+        onMomentumScrollBegin={[Function]}
+        onMomentumScrollEnd={[Function]}
+        onScroll={[Function]}
+        onScrollBeginDrag={[Function]}
+        onScrollEndDrag={[Function]}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        stickyHeaderIndices={Array []}
+        viewabilityConfigCallbackPairs={Array []}
+      >
+        <View />
+      </RCTScrollView>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "margin": 8,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#fff",
+              "padding": 8,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          nativeID="animatedComponent"
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+                "fontSize": 12,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            Subscribe
+          </Text>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "margin": 8,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#fff",
+              "padding": 8,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          nativeID="animatedComponent"
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+                "fontSize": 12,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            Toggle Feed
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

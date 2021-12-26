@@ -24,6 +24,7 @@ export interface OrderbookState {
   asks: OrderSideType[];
   numLevels: number;
   displaySize: number;
+  isSubscriptionActive: boolean;
   currentProductIds: ProductIdType[];
   subscribeToOrderbookInProgress: boolean;
   subscribeToOrderbookError: any;

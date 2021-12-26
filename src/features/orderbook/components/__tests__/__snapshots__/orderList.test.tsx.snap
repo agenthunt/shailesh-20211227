@@ -1,0 +1,506 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OrderList component testing renders default state of OrderList correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": 16,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "flex": 0.33,
+          "paddingRight": 20,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "flex-end",
+            "borderBottomColor": "#98a6af",
+            "borderBottomWidth": 0.3,
+            "borderRadius": 1,
+            "borderStyle": "dashed",
+            "color": "#98a6af",
+            "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+            "fontSize": 12,
+            "textAlign": "center",
+            "textAlignVertical": "center",
+          }
+        }
+      >
+        PRICE
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "flex": 0.33,
+          "paddingRight": 20,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "flex-end",
+            "borderBottomColor": "#98a6af",
+            "borderBottomWidth": 0.3,
+            "borderRadius": 1,
+            "borderStyle": "dashed",
+            "color": "#98a6af",
+            "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+            "fontSize": 12,
+            "textAlign": "center",
+            "textAlignVertical": "center",
+          }
+        }
+      >
+        SIZE
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "flex": 0.33,
+          "paddingRight": 20,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "flex-end",
+            "borderBottomColor": "#98a6af",
+            "borderBottomWidth": 0.3,
+            "borderRadius": 1,
+            "borderStyle": "dashed",
+            "color": "#98a6af",
+            "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+            "fontSize": 12,
+            "textAlign": "center",
+            "textAlignVertical": "center",
+          }
+        }
+      >
+        TOTAL
+      </Text>
+    </View>
+  </View>
+  <RCTScrollView
+    data={
+      Array [
+        Object {
+          "depth": 4.3,
+          "price": "1000",
+          "size": "50",
+          "total": "50",
+        },
+        Object {
+          "depth": 13,
+          "price": "1005",
+          "size": "100",
+          "total": "150",
+        },
+        Object {
+          "depth": 100,
+          "price": "1010",
+          "size": "1000",
+          "total": "1150",
+        },
+      ]
+    }
+    getItem={[Function]}
+    getItemCount={[Function]}
+    getItemLayout={[Function]}
+    invertStickyHeaders={false}
+    inverted={false}
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    showsHorizontalScrollIndicator={false}
+    showsVerticalScrollIndicator={false}
+    stickyHeaderIndices={Array []}
+    viewabilityConfigCallbackPairs={Array []}
+  >
+    <View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flex": 1,
+                "flexDirection": "row",
+                "padding": 4,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "height": 28,
+                "position": "absolute",
+                "width": "100%",
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "backgroundColor": "#641c25",
+                  "borderColor": "rgba(255, 255, 255, 0.1)",
+                  "borderWidth": 0.1,
+                  "height": "100%",
+                  "width": "430%",
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingRight": 20,
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#29baa5",
+                    "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+                    "fontSize": 12,
+                    "textAlign": "center",
+                    "textAlignVertical": "center",
+                  },
+                  Object {
+                    "color": "#eb4057",
+                  },
+                ]
+              }
+            >
+              1000
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingRight": 20,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+                  "fontSize": 12,
+                  "textAlign": "center",
+                  "textAlignVertical": "center",
+                }
+              }
+            >
+              50
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingRight": 20,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+                  "fontSize": 12,
+                  "textAlign": "center",
+                  "textAlignVertical": "center",
+                }
+              }
+            >
+              50
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flex": 1,
+                "flexDirection": "row",
+                "padding": 4,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "height": 28,
+                "position": "absolute",
+                "width": "100%",
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "backgroundColor": "#641c25",
+                  "borderColor": "rgba(255, 255, 255, 0.1)",
+                  "borderWidth": 0.1,
+                  "height": "100%",
+                  "width": "1300%",
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingRight": 20,
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#29baa5",
+                    "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+                    "fontSize": 12,
+                    "textAlign": "center",
+                    "textAlignVertical": "center",
+                  },
+                  Object {
+                    "color": "#eb4057",
+                  },
+                ]
+              }
+            >
+              1005
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingRight": 20,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+                  "fontSize": 12,
+                  "textAlign": "center",
+                  "textAlignVertical": "center",
+                }
+              }
+            >
+              100
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingRight": 20,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+                  "fontSize": 12,
+                  "textAlign": "center",
+                  "textAlignVertical": "center",
+                }
+              }
+            >
+              150
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flex": 1,
+                "flexDirection": "row",
+                "padding": 4,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "height": 28,
+                "position": "absolute",
+                "width": "100%",
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "backgroundColor": "#641c25",
+                  "borderColor": "rgba(255, 255, 255, 0.1)",
+                  "borderWidth": 0.1,
+                  "height": "100%",
+                  "width": "10000%",
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingRight": 20,
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#29baa5",
+                    "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+                    "fontSize": 12,
+                    "textAlign": "center",
+                    "textAlignVertical": "center",
+                  },
+                  Object {
+                    "color": "#eb4057",
+                  },
+                ]
+              }
+            >
+              1010
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingRight": 20,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+                  "fontSize": 12,
+                  "textAlign": "center",
+                  "textAlignVertical": "center",
+                }
+              }
+            >
+              1000
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingRight": 20,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "LED SCREEN GTAMBLOG CAPS+ 2.0",
+                  "fontSize": 12,
+                  "textAlign": "center",
+                  "textAlignVertical": "center",
+                }
+              }
+            >
+              1150
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;

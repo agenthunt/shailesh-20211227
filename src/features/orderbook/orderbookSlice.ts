@@ -32,6 +32,7 @@ const initialState: OrderbookState = {
   bids: [],
   asks: [],
   numLevels: 0,
+  isSubscriptionActive: false,
   displaySize: 14,
   currentProductIds: [],
   subscribeToOrderbookInProgress: false,
@@ -51,12 +52,13 @@ export const orderbookSlice = createSlice({
       state.subscribeToOrderbookInProgress = true;
       state.subscribeToOrderbookError = null;
       state.currentProductIds = action.payload;
-      state.asks = [];
-      state.bids = [];
     },
     subscribeToOrderbookSuccess(state) {
       state.subscribeToOrderbookInProgress = false;
       state.subscribeToOrderbookError = null;
+      state.isSubscriptionActive = true;
+      state.asks = [];
+      state.bids = [];
     },
     unsubscribeToOrderbook(state) {
       state.unSubscribeToOrderbookInProgress = true;
@@ -66,6 +68,7 @@ export const orderbookSlice = createSlice({
       state.unSubscribeToOrderbookInProgress = false;
       state.unSubscribeToOrderbookError = null;
       state.currentProductIds = [];
+      state.isSubscriptionActive = false;
     },
     setOrders(
       state,
@@ -134,8 +137,8 @@ const workerSagas: any = {
     );
 
     // processes events
-    yield takeEvery(orderbookEventChannel, workerSagas.processEventSaga);
     yield put(orderbookSlice.actions.subscribeToOrderbookSuccess());
+    yield takeEvery(orderbookEventChannel, workerSagas.processEventSaga);
 
     // wait for unsubscribe action dispatch
     yield take(orderbookSlice.actions.unsubscribeToOrderbook.type);
@@ -144,6 +147,7 @@ const workerSagas: any = {
     orderbookEventChannel.close();
     yield put(orderbookSlice.actions.unsubscribeToOrderbookSuccess());
   },
+
   *processEventSaga(eventString: any) {
     const event = JSON.parse(eventString);
     if (
@@ -185,12 +189,16 @@ const workerSagas: any = {
     }
   },
   *toggleFeedSaga() {
-    //unsubscribe
-    yield put(orderbookSlice.actions.unsubscribeToOrderbook());
-    //change currentProductIds
     const orderbookSliceState: OrderbookState = yield select(
       state => state.orderbook,
     );
+
+    //unsubscribe
+    if (orderbookSliceState.isSubscriptionActive) {
+      yield put(orderbookSlice.actions.unsubscribeToOrderbook());
+    }
+
+    //change currentProductIds
     let newProductIds = orderbookSliceState.currentProductIds;
     if (orderbookSliceState.currentProductIds[0] === ProductIdType.PI_ETHUSD) {
       newProductIds = [ProductIdType.PI_XBTUSD];

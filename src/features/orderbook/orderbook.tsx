@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, Button, StyleSheet, Text, View} from 'react-native';
 import {
   useAppDispatch,
   useAppSelector,
@@ -42,6 +42,14 @@ export function Orderbook() {
       flipDepthLevelDirection={isDesktop}
     />
   );
+  const subscribeToOrderbookInProgress = useAppSelector(
+    state => state.orderbook.subscribeToOrderbookInProgress,
+  );
+  const unSubscribeToOrderbookInProgress = useAppSelector(
+    state => state.orderbook.unSubscribeToOrderbookInProgress,
+  );
+  const showLoadingIndicator =
+    subscribeToOrderbookInProgress || unSubscribeToOrderbookInProgress;
 
   const asksList = (
     <OrderList
@@ -79,6 +87,9 @@ export function Orderbook() {
   );
   return (
     <View style={[styles.container, {height: isDesktop ? '100vh' : '100%'}]}>
+      <View style={styles.loadingIndicatorContainer}>
+        <ActivityIndicator size="large" animating={showLoadingIndicator} />
+      </View>
       <View style={styles.headingContainer}>
         <Text style={styles.heading}> Order Book </Text>
         {isDesktop && spreadDesktop}
@@ -128,6 +139,16 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: CardBackgroundColor,
     padding: 8,
+  },
+  loadingIndicatorContainer: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0,0,0,0.1)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   headingContainer: {
     flexDirection: 'row',
