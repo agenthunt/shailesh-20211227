@@ -100,7 +100,7 @@ export const orderbookSlice = createSlice({
   },
 });
 
-function createOrderbookEventChannel(
+export function createOrderbookEventChannel(
   socket: WebSocket,
   product_ids: ProductIdType[],
 ) {
@@ -135,13 +135,9 @@ function createOrderbookEventChannel(
   });
 }
 
-const workerSagas: any = {
+export const workerSagas: any = {
   *subscribeToOrderbookSaga({payload}: {payload: ProductIdType[]}) {
     const socket: WebSocket = yield call(createCryptoFacilitiesConnection);
-    const orderbookSliceState: OrderbookState = yield select(
-      state => state.orderbook,
-    );
-
     yield put(orderbookSlice.actions.subscribeToOrderbookProgress());
     // Connects and subscribes to orderbook event channel
     const orderbookEventChannel: EventChannel<unknown> = yield call(
@@ -222,9 +218,11 @@ const workerSagas: any = {
     } else {
       newProductIds = [ProductIdType.PI_XBTUSD];
     }
+
     yield put(
       orderbookSlice.actions.subscribeToOrderbookRequest(newProductIds),
     );
+    console.log('hello here');
   },
 };
 
