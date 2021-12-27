@@ -115,7 +115,9 @@ export function Orderbook() {
             <LedButton
               title="Unsubscribe"
               onPress={() => {
-                dispatch(orderbookSlice.actions.unsubscribeToOrderbook());
+                dispatch(
+                  orderbookSlice.actions.unSubscribeToOrderbookRequest(),
+                );
               }}
             />
           </View>

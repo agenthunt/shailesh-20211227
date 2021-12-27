@@ -37,7 +37,7 @@ const App = () => {
         nextAppState.match(/inactive|background/)
       ) {
         console.log('App is going to background!');
-        dispatch(orderbookSlice.actions.unsubscribeToOrderbook());
+        dispatch(orderbookSlice.actions.unSubscribeToOrderbookRequest());
       }
 
       appState.current = nextAppState;

@@ -48,27 +48,40 @@ export const orderbookSlice = createSlice({
     setNumLevels(state, action: PayloadAction<number>) {
       state.numLevels = action.payload;
     },
-    subscribeToOrderbook(state, action: PayloadAction<ProductIdType[]>) {
+    subscribeToOrderbookRequest(
+      state,
+      action: PayloadAction<ProductIdType[]>,
+    ) {},
+    unSubscribeToOrderbookRequest() {},
+    subscribeToOrderbookProgress(state) {
       state.subscribeToOrderbookInProgress = true;
       state.subscribeToOrderbookError = null;
-      state.currentProductIds = action.payload;
     },
-    subscribeToOrderbookSuccess(state) {
+    subscribeToOrderbookSuccess(state, action: PayloadAction<ProductIdType[]>) {
       state.subscribeToOrderbookInProgress = false;
       state.subscribeToOrderbookError = null;
       state.isSubscriptionActive = true;
+      state.currentProductIds = action.payload;
       state.asks = [];
       state.bids = [];
     },
-    unsubscribeToOrderbook(state) {
+    subscribeToOrderbookFailure(state, action: PayloadAction<any>) {
+      state.subscribeToOrderbookInProgress = false;
+      state.subscribeToOrderbookError = action.payload;
+    },
+    unSubscribeToOrderbookProgress(state) {
       state.unSubscribeToOrderbookInProgress = true;
       state.unSubscribeToOrderbookError = null;
     },
-    unsubscribeToOrderbookSuccess(state) {
+    unSubscribeToOrderbookSuccess(state) {
       state.unSubscribeToOrderbookInProgress = false;
       state.unSubscribeToOrderbookError = null;
       state.currentProductIds = [];
       state.isSubscriptionActive = false;
+    },
+    unSubscribeToOrderbookFailure(state, action: PayloadAction<any>) {
+      state.unSubscribeToOrderbookInProgress = false;
+      state.unSubscribeToOrderbookError = action.payload;
     },
     setOrders(
       state,
@@ -129,23 +142,23 @@ const workerSagas: any = {
       state => state.orderbook,
     );
 
+    yield put(orderbookSlice.actions.subscribeToOrderbookProgress());
     // Connects and subscribes to orderbook event channel
     const orderbookEventChannel: EventChannel<unknown> = yield call(
       createOrderbookEventChannel,
       socket,
-      orderbookSliceState.currentProductIds,
+      payload,
     );
 
     // processes events
-    yield put(orderbookSlice.actions.subscribeToOrderbookSuccess());
+    yield put(orderbookSlice.actions.subscribeToOrderbookSuccess(payload));
     yield takeEvery(orderbookEventChannel, workerSagas.processEventSaga);
 
     // wait for unsubscribe action dispatch
-    yield take(orderbookSlice.actions.unsubscribeToOrderbook.type);
-
+    yield take(orderbookSlice.actions.unSubscribeToOrderbookRequest.type);
     // unsuscribe and close eventchannel and socket
     orderbookEventChannel.close();
-    yield put(orderbookSlice.actions.unsubscribeToOrderbookSuccess());
+    yield put(orderbookSlice.actions.unSubscribeToOrderbookSuccess());
   },
 
   *processEventSaga(eventString: any) {
@@ -195,7 +208,7 @@ const workerSagas: any = {
 
     //unsubscribe
     if (orderbookSliceState.isSubscriptionActive) {
-      yield put(orderbookSlice.actions.unsubscribeToOrderbook());
+      yield put(orderbookSlice.actions.unSubscribeToOrderbookRequest());
     }
 
     //change currentProductIds
@@ -209,18 +222,20 @@ const workerSagas: any = {
     } else {
       newProductIds = [ProductIdType.PI_XBTUSD];
     }
-    yield put(orderbookSlice.actions.subscribeToOrderbook(newProductIds));
+    yield put(
+      orderbookSlice.actions.subscribeToOrderbookRequest(newProductIds),
+    );
   },
 };
 
 const watcherSagas: any = {
-  *watchSubscribeToOrderbookRequest() {
+  *watchSubscribeToOrderbookRequestSaga() {
     yield takeLatest(
-      orderbookSlice.actions.subscribeToOrderbook.type,
+      orderbookSlice.actions.subscribeToOrderbookRequest.type,
       workerSagas.subscribeToOrderbookSaga,
     );
   },
-  *watchToggleFeedRequest() {
+  *watchToggleFeedRequestSaga() {
     yield takeLatest(
       orderbookSlice.actions.toggleFeed.type,
       workerSagas.toggleFeedSaga,
